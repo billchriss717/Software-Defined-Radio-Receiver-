@@ -82,7 +82,8 @@ The script generates a comprehensive suite of plots for performance verification
 
 
 4. Constellation Diagram: Displays the recovered symbol points. In a perfect recovery, these should cluster tightly around the PAM levels.
-![](./Pictures/Full_Constellation_Mystery_file_A.png)
+
+<img src="./Pictures/Full_Constellation_Mystery_file_A.png" width="400">
 
 ## 🚀 How to Use
 
