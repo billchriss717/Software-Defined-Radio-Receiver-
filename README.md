@@ -69,21 +69,14 @@ Once the symbol stream is stabilized, the receiver looks for a known sequence (P
 The script generates a comprehensive suite of plots for performance verification:
 
 1. Spectral Analysis: Visualizing the signal in the frequency domain before and after downconversion.
-
-![](./Pictures/spectral_analysis_Mystery_file_A.png)
-
 2. Synchronization Performance: Tracking the convergence of the PLL (θ) and the Timing Recovery (τ).
 
-![](./Pictures/Synchronization_Performance_Mystery_file_A.png)
+<img src="./Pictures/spectral_analysis_Mystery_file_A.png" width="400"><img src="./Pictures/Synchronization_Performance_Mystery_file_A.png" width="400">
 
 3. Eye Diagram: A high-resolution visualization of the ISI levels. A "clear eye" indicates successful timing and filtering.
-
-![](./Pictures/Post-MF_Eye_Diagram_Mystery_file_A.png)
-
-
 4. Constellation Diagram: Displays the recovered symbol points. In a perfect recovery, these should cluster tightly around the PAM levels.
 
-<img src="./Pictures/Full_Constellation_Mystery_file_A.png" width="400">
+<img src="./Pictures/Post-MF_Eye_Diagram_Mystery_file_A.png" width="400"><img src="./Pictures/Full_Constellation_Mystery_file_A.png" width="400">
 
 ## 🚀 How to Use
 
