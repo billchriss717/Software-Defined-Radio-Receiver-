@@ -84,28 +84,29 @@ The script generates a comprehensive suite of plots for performance verification
 
 1. Clone the Repo:
 ```Bash
-    git clone https://github.com/billchriss717/Mystery-Signal-Recovery.git
-    cd Mystery-Signal-Recovery
+    git clone https://github.com/billchriss717/Software-Defined-Radio-Receiver-.git
+
+    cd Software-Defined_Radio_Receiver
 ```
 
 2. Setup Folders: Ensure your .mat files are in ./mystery_files/ and an empty directory ./Pictures/ exists for exports.
 
-    Run in MATLAB:
+3. Run in MATLAB:
 
-        Open receiver_main.m.
+```text
+Open SDR-receiver.m.
 
-        Press Run.
+Press Run.
 
-        Select signal 1, 2, or 3 when prompted in the Command Window.
+Select signal 1, 2, or 3 when prompted in the Command Window.
+```
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 Tadouanla Guetchuin Billy
 
-    Specialization: Embedded Systems & FPGA Engineering
+- **Other Specialization:** Embedded Systems & FPGA Engineering
 
-    Portfolio: billchriss717.github.io
+- **Portfolio:** billchriss717.github.io
 
-    LinkedIn: [Link here]
-
-This project was developed as part of the Communication and Information Engineering curriculum at Hochschule Rhein-Waal.
+*This project was developed as part of the Communication and Information Engineering curriculum at Hochschule Rhein-Waal.*
