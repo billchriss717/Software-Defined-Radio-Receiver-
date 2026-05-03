@@ -1,86 +1,98 @@
-This is a professional README.md structure tailored for your GitHub repository. It focuses on the technical sophistication of your implementation (specifically the synchronization loops and signal processing chain) to impress recruiters or fellow engineers.
 Digital Communication Receiver: Mystery Signal Recovery
-📡 Overview
+# 📡 Overview
 
-This project implements a professional-grade Software Defined Radio (SDR) Receiver in MATLAB. It is designed to recover hidden text messages from "mystery" signals (A, B, and C) modulated using M-ary PAM. The receiver handles real-world signal impairments, including frequency offsets, phase noise, inter-symbol interference (ISI), and timing jitter.
-Key Technical Highlights:
+This project implements a professional-grade Software Defined Radio (SDR) Receiver in MATLAB.
+It is designed to recover hidden text messages from "mystery" signals (A, B, and C) modulated
+using M-ary PAM. The receiver handles real-world signal impairments, including frequency offsets,
+phase noise, inter-symbol interference (ISI), and timing jitter.
 
-    Carrier Phase Recovery: High-performance Costas Loop for phase-locked loop (PLL) tracking.
+## Key Technical Highlights:
 
-    Symbol Timing Sync: Mueller-Muller-inspired timing error detector using sinc interpolation.
+-    **Carrier Phase Recovery:** High-performance Costas Loop for phase-locked loop (PLL) tracking.
 
-    Adaptive Filtering: SRRC matched filtering and notch-filter interference suppression.
+-    **Symbol Timing Sync:** Mueller-Muller-inspired timing error detector using sinc interpolation.
 
-    Frame Synchronization: Preamble-based correlation for header detection and payload extraction.
+-    **Adaptive Filtering:** SRRC matched filtering and notch-filter interference suppression.
 
-🛠 The Receiver Architecture
+-    **Frame Synchronization:** Preamble-based correlation for header detection and payload extraction.
+
+## 🛠 The Receiver Architecture
 
 The receiver follows a standard digital communication pipeline:
-1. Signal Pre-Processing & Notch Filtering
+
+### 1. Signal Pre-Processing & Notch Filtering
 
 For complex environments (like Mystery File C), the receiver employs high-Q notch filters.
 
-    Objective: Suppress specific narrowband interference (at 90kHz and 100kHz) that could disrupt the PLL or timing recovery.
+- **Objective: Suppress** specific narrowband interference (at 90kHz and 100kHz) that could disrupt the PLL or timing recovery.
 
-    Implementation: Recursive IIR filters with poles placed close to the unit circle for sharp frequency rejection.
+- **Implementation:** Recursive IIR filters with poles placed close to the unit circle for sharp frequency rejection.
 
-2. Carrier Recovery (Costas Loop)
+### 2. Carrier Recovery (Costas Loop)
 
 Since the local oscillator is rarely perfectly synchronized with the transmitter, a Costas PLL is used.
 
-    The Math: It calculates a phase error by multiplying the In-phase (I) and Quadrature (Q) components of the baseband signal.
+- **The Math:** It calculates a phase error by multiplying the In-phase (I) and Quadrature (Q) components of the baseband signal.
 
-    Loop Filter: A Low-Pass Filter (LPF) smooths the error signal, which updates the instantaneous phase θ to track the carrier.
+- **Loop Filter:** A Low-Pass Filter (LPF) smooths the error signal, which updates the instantaneous phase θ to track the carrier.
 
-3. Matched Filtering (SRRC)
+### 3. Matched Filtering (SRRC)
 
 To maximize the Signal-to-Noise Ratio (SNR) and minimize ISI, the receiver applies a Root-Raised Cosine (RRC) filter.
 
-    Pulse Shaping: The filter is matched to the transmitter's pulse shape.
+- **Pulse Shaping:** The filter is matched to the transmitter's pulse shape.
 
-    Normalization: The filter energy is normalized to ensure the symbol amplitudes remain within the expected range for quantization.
+- **Normalization:** The filter energy is normalized to ensure the symbol amplitudes remain within the expected range for quantization.
 
-4. Symbol Timing Recovery
+### 4. Symbol Timing Recovery
 
 The sampling instances in the ADC are rarely aligned with the centers of the received symbols. The receiver uses a closed-loop timing recovery system:
 
-    Interpolation: Uses Sinc Interpolation to calculate signal values between actual samples.
+- **Interpolation:** Uses Sinc Interpolation to calculate signal values between actual samples.
 
-    Error Detection: A derivative-based timing error detector adjusts the fractional delay τ.
+- **Error Detection:** A derivative-based timing error detector adjusts the fractional delay τ.
 
-    Convergence: The loop iteratively shifts the sampling point until it lands on the "eye-opening" of the signal.
+- **Convergence:** The loop iteratively shifts the sampling point until it lands on the "eye-opening" of the signal.
 
-5. Frame Synchronization & Decoding
+### 5. Frame Synchronization & Decoding
 
 Once the symbol stream is stabilized, the receiver looks for a known sequence (Preamble).
 
-    Cross-Correlation: The receiver slides a local copy of the preamble symbols across the received stream.
+- **Cross-Correlation:** The receiver slides a local copy of the preamble symbols across the received stream.
 
-    Header Detection: A peak in the correlation value indicates the start of a new frame.
+- **Header Detection:** A peak in the correlation value indicates the start of a new frame.
 
-    PAM Decoding: Soft symbols are sliced into hard levels ([-3, -1, 1, 3]) and mapped back to ASCII characters.
+- **PAM Decoding:** Soft symbols are sliced into hard levels ([-3, -1, 1, 3]) and mapped back to ASCII characters.
 
-📊 Visual Analysis Dashboard
+## 📊 Visual Analysis Dashboard
 
 The script generates a comprehensive suite of plots for performance verification:
 
-    Spectral Analysis: Visualizing the signal in the frequency domain before and after downconversion.
+1. Spectral Analysis: Visualizing the signal in the frequency domain before and after downconversion.
 
-    Synchronization Performance: Tracking the convergence of the PLL (θ) and the Timing Recovery (τ).
+![](./Pictures/spectral_analysis_Mystery_file_A.png)
 
-    Eye Diagram: A high-resolution visualization of the ISI levels. A "clear eye" indicates successful timing and filtering.
+2. Synchronization Performance: Tracking the convergence of the PLL (θ) and the Timing Recovery (τ).
 
-    Constellation Diagram: Displays the recovered symbol points. In a perfect recovery, these should cluster tightly around the PAM levels.
+![](./Pictures/Synchronization_Performance_Mystery_file_A.png)
 
-🚀 How to Use
+3. Eye Diagram: A high-resolution visualization of the ISI levels. A "clear eye" indicates successful timing and filtering.
 
-    Clone the Repo:
-    Bash
+![](./Pictures/Post-MF_Eye_Diagram_Mystery_file_A.png)
 
+
+4. Constellation Diagram: Displays the recovered symbol points. In a perfect recovery, these should cluster tightly around the PAM levels.
+![](./Pictures/Full_Constellation_Mystery_file_A.png)
+
+## 🚀 How to Use
+
+1. Clone the Repo:
+```Bash
     git clone https://github.com/billchriss717/Mystery-Signal-Recovery.git
     cd Mystery-Signal-Recovery
+```
 
-    Setup Folders: Ensure your .mat files are in ./mystery_files/ and an empty directory ./Pictures/ exists for exports.
+2. Setup Folders: Ensure your .mat files are in ./mystery_files/ and an empty directory ./Pictures/ exists for exports.
 
     Run in MATLAB:
 
